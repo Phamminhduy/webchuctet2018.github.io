@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<!-- Code share by Vannamit.com
-contact: fb.com.vannamit
-
- -->
-
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF8">
-    <title>New Year 2018 !</title>    
+<html lang="vn">
+<head>
+	<title>Chúc Mừng Năm Mới 2018</title>
+	<meta charset="utf-8">
 	<meta content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0' name='viewport'/>
     <meta name="theme-color" content="#880043">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300italic,300,400italic,700,700italic&amp;subset=latin,vietnamese' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300italic,300,400italic,700,700italic&amp;subset=latin,vietnamese' rel='stylesheet' type='text/css'/>
 	<link href='http://fonts.googleapis.com/css?family=Raleway:400,500,700|Open+Sans:800' rel='stylesheet' type='text/css'/>
 	<link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'/>
 	<link href='http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css' rel='stylesheet'/>
-	<link href="webchuctet2018.github.io/fireworks.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="webchuctet2018.github.io/component.css" />
-	<link href="webchuctet2018.github.io/soon.min.css" rel="stylesheet"/>		
-	<link href="webchuctet2018.github.io/animate.css" rel="stylesheet"/>		
-	<style>
-		body {
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style type="text/css">
+	html, body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+}
+
+#library {
+  display: none;
+}
+
+canvas {
+  -webkit-transform: translateZ(0);
+}
+	body {
 			margin: 0;
 			padding: 0;
 			text-align: center;
@@ -315,10 +323,445 @@ contact: fb.com.vannamit
 				width: 120px;
 			}
 		}
-	</style>
-  </head>
+		/* Main component wrapper */
 
-  <body>
+.component {
+	position: absolute;
+	z-index: 1;
+	width: 300px;
+	height: 500px;
+	margin: 0 auto;
+	left:50%;
+	bottom:25px;
+	transform: translateX(-50%);
+	visibility: hidden;
+}
+
+
+/* Visible path of the morphing shapes */
+
+.morph__button {
+	fill: #fff;
+}
+
+
+/* Actual buttons (laid over shapes) */
+
+.button {
+	font-weight: bold;
+	position: absolute;
+	bottom: 4px;
+	left: 20px;
+	width: calc(100% - 40px);
+	height: 60px;
+	padding: 0;
+	text-align: center;
+	color: #00a7e7;
+	border: none;
+	background: none;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.button:hover,
+.button:focus {
+	outline: none;
+	color: #048abd;
+}
+
+.button--listen {
+	pointer-events: none;
+}
+
+.button--close {
+	z-index: 10;
+	top: 0px;
+	right: 0px;
+	left: auto;
+	width: 40px;
+	height: 40px;
+	padding: 10px;
+	color: #fff;
+}
+
+.button--close:hover,
+.button--close:focus {
+	color: #ddd;
+}
+
+.button--hidden {
+	pointer-events: none;
+	opacity: 0;
+}
+
+
+/* Inner content of the start/*/
+
+.button__content {
+	position: absolute;
+	opacity: 0;
+	-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
+	transition: transform 0.4s, opacity 0.4s;
+}
+
+.button__content--start {
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 1.2em;
+	text-indent: 1px;
+	letter-spacing: 1px;
+	-webkit-transform: translate3d(0, -25px, 0);
+	transform: translate3d(0, -25px, 0);
+	-webkit-transition-timing-function: cubic-bezier(0.8, -0.6, 0.2, 1);
+	transition-timing-function: cubic-bezier(0.8, -0.6, 0.2, 1);
+}
+
+.button__content--listen {
+	font-size: 1.75em;
+	line-height: 64px;
+	bottom: 0;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin: 0 0 0 -30px;
+	border-radius: 50%;
+	-webkit-transform: translate3d(0, 25px, 0);
+	transform: translate3d(0, 25px, 0);
+	-webkit-transition-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+	transition-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.button__content--listen::before,
+.button__content--listen::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	opacity: 0;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+}
+
+.button--animate .button__content--listen::before,
+.button--animate .button__content--listen::after {
+	-webkit-animation: anim-ripple 1.2s ease-out infinite forwards;
+	animation: anim-ripple 1.2s ease-out infinite forwards;
+}
+
+.button--animate .button__content--listen::after {
+	-webkit-animation-delay: 0.6s;
+	animation-delay: 0.6s;
+}
+
+@-webkit-keyframes anim-ripple {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale3d(3, 3, 1);
+		transform: scale3d(3, 3, 1);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes anim-ripple {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale3d(3, 3, 1);
+		transform: scale3d(3, 3, 1);
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+.button--start .button__content--start,
+.button--listen .button__content--listen {
+	opacity: 1;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+.player {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	bottom: 10px;
+	left: 10px;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.player::after {
+	content: '';
+	position: absolute;
+	top: -1px;
+	/* for mobile Safari bug (white line of SVG visible) */
+	left: 0;
+	width: 100%;
+	height: 280px;
+	pointer-events: none;
+	border-radius: 5px 5px 0 0;
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+}
+
+.player--hidden {
+	pointer-events: none;
+	opacity: 0;
+	-webkit-transition: opacity 0.2s;
+	transition: opacity 0.2s;
+}
+
+.player__cover {
+	margin-top: -1px;
+	/* for mobile Safari bug (white line of SVG visible) */
+	border-radius: 5px 5px 0 0;
+}
+
+.player__meta {
+	padding: 0 1em 1em;
+	text-align: center;
+}
+
+.player__track {
+	font-size: 1.15em;
+	margin: 1.25em 0 0.05em 0;
+	color: #55656c;
+}
+
+.player__album {
+	font-size: 0.825em;
+	margin: 0;
+	color: #bbc1c3;
+}
+
+.player__album-name,
+.player__artist {
+	color: #adb5b8;
+}
+
+.player__controls {
+	font-size: 1.15em;
+	margin: 1.15em 0 0 0;
+}
+
+.player__control {
+	margin: 0 0.85em;
+	padding: 0;
+	vertical-align: middle;
+	color: #adb5b8;
+	border: 0;
+	background: none;
+}
+
+.player__control:hover,
+.player__control:focus {
+	color: #00a7e7;
+	outline: none;
+}
+
+.player__control--play {
+	font-size: 1.75em;
+}
+
+.notes {
+	position: absolute;
+	z-index: -1;
+	bottom: 0;
+	left: 50%;
+	width: 100px;
+	height: 60px;
+	margin: 0 0 0 -50px;
+}
+
+.note {
+	font-size: 2.8em;
+	position: absolute;
+	left: 50%;
+	width: 1em;
+	margin: 0 0 0 -0.5em;
+	opacity: 0;
+	color: rgba(255, 255, 255, 0.75);
+}
+
+.note:nth-child(odd) {
+	color: rgba(0, 0, 0, 0.1);
+}
+
+.note:nth-child(4n) {
+	font-size: 2em;
+}
+
+.note:nth-child(6n) {
+	color: rgba(255, 255, 255, 0.3);
+}
+
+
+
+
+
+
+.hi-icon-wrap {
+	text-align: center;
+	margin: 0 auto;
+	padding: 2em 0 .5em;
+	position: absolute;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.hi-icon {
+	display: inline-block;
+	font-size: 0px;
+	cursor: pointer;
+	margin: 15px 30px;
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+	color: #fff;
+}
+
+.hi-icon:after {
+	pointer-events: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	content: '';
+	-webkit-box-sizing: content-box; 
+	-moz-box-sizing: content-box; 
+	box-sizing: content-box;
+}
+
+.hi-icon:before {
+	font-family: 'FontAwesome';
+	speak: none;
+	font-size: 48px;
+	line-height: 90px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	display: block;
+	-webkit-font-smoothing: antialiased;
+}
+
+.hi-icon-photo:before {
+	content: "\f030";
+}
+
+.hi-icon-video:before {
+	content: "\f01d";
+}
+
+.hi-icon-music:before {
+	content: "\f001";
+}
+
+.hi-icon-livetv:before {
+	content: "\f108";
+}
+
+/* Effect 8 */
+.hi-icon-effect-8 .hi-icon {
+	background: rgba(255,255,255,0.1);
+	-webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
+	-moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
+	transition: transform ease-out 0.1s, background 0.2s;
+}
+
+.hi-icon-effect-8 .hi-icon:after {
+	top: 0;
+	left: 0;
+	padding: 0;
+	z-index: -1;
+	box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+	opacity: 0;
+	-webkit-transform: scale(0.9);
+	-moz-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	transform: scale(0.9);
+}
+
+.hi-icon-effect-8 .hi-icon:hover {
+	background: rgba(255,255,255,0.05);
+	-webkit-transform: scale(0.93);
+	-moz-transform: scale(0.93);
+	-ms-transform: scale(0.93);
+	transform: scale(0.93);
+	color: #fff;
+}
+
+.hi-icon-effect-8 .hi-icon:hover:after {
+	-webkit-animation: sonarEffect 1.3s ease-out 75ms;
+	-moz-animation: sonarEffect 1.3s ease-out 75ms;
+	animation: sonarEffect 1.3s ease-out 75ms;
+}
+
+@-webkit-keyframes sonarEffect {
+	0% {
+		opacity: 0.3;
+	}
+	40% {
+		opacity: 0.5;
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+		-webkit-transform: scale(1.5);
+		opacity: 0;
+	}
+}
+@-moz-keyframes sonarEffect {
+	0% {
+		opacity: 0.3;
+	}
+	40% {
+		opacity: 0.5;
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+		-moz-transform: scale(1.5);
+		opacity: 0;
+	}
+}
+@keyframes sonarEffect {
+	0% {
+		opacity: 0.3;
+	}
+	40% {
+		opacity: 0.5;
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+		transform: scale(1.5);
+		opacity: 0;
+	}
+}
+	</style>
+</head>
+ <body>
 	<div class="content-logo-wrap">
 		<div class="content-logo">
 			<svg class="sgmlogo" viewBox="0 0 1100 300">
@@ -375,142 +818,8 @@ contact: fb.com.vannamit
 		<a href="#" class="gp"><i class="fa fa-google-plus-square"></i></a>
 		<a href="#" class="yt"><i class="fa fa-youtube-square"></i></a>
 		<a href="https://www.facebook.com/thi.ta.779" class="fb"><i class="fa fa-facebook-official"></i></a>
-		<div style="clear:both;"/>
+		<div style="clear:both;"/></div>
 	</div>	
 	<div id="bg-music" class="jp-jplayer"></div>
   </body>
-  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript'></script>
-  <script src="lib/soundjs-0.6.2.min.js"></script>
-  <script src="lib/flashaudioplugin-0.6.2.min.js"></script>
-  <script src="lib/jplayer/jquery.jplayer.min.js"></script>
-  <script type="text/javascript" src="js/script.js"> </script>  
-  <script>
-	createjs.FlashAudioPlugin.swfPath = "lib/flashaudio/FlashAudioPlugin.swf";
-	createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]);
-  </script>
-  <script src="js/requestanimframe.js"></script>
-  <script src="js/fireworks.min.js"></script>
-  <script src="lib/moment.js"></script>
-  <script src="lib/moment-timezone-with-data.js"></script>
-  <script src="lib/amlich-ntt.js"></script>  
-  <script src="lib/soon.min.js" data-auto="false"></script>
-  <script src="lib/jquery.lettering.js"></script>
-  <script src="lib/jquery.textillate.js"></script>
-  
-  <script>
-var canvas=document.getElementById("canvastext"),ctx=canvas.getContext("2d"),W=window.innerWidth,H=window.innerHeight,text="2018",text2="Chúc Mừng Năm Mới Nhé Thi Ta",skipCount=4,gravity=.2,touched=!1,mouse={},minDist=20,bounceFactor=.6;canvas.height=H;canvas.width=W;function trackPos(a){mouse.x=a.pageX;mouse.y=a.pageY}
-var Particle1=function(){this.r=6*Math.random();this.y=this.x=-100;this.vy=-5+parseInt(10*Math.random());this.vx=-5+parseInt(10*Math.random());this.isFree=!1;this.a=Math.random();this.draw=function(){ctx.beginPath();ctx.fillStyle="rgb(255, 51, 51)"+this.a+")";ctx.arc(this.x,this.y,this.r,0,2*Math.PI,!1);ctx.fill();ctx.closePath()};this.setPos=function(a,d){this.x=a;this.y=d}},particles1=[];
-(function(){ctx.fillStyle="black";ctx.font="100px Arial, sans-serif";ctx.textAlign="center";ctx.fillText(text,W/2,H/3);ctx.fillStyle="rgb(255, 51, 51)";ctx.font="70px Arial, sans-serif";ctx.fillText(text2,W/2,H/3+100)})();(function(){})();(function(){for(var a=ctx.getImageData(0,0,W,W),d=a.data,b=0;b<a.height;b+=skipCount)for(var c=0;c<a.width;c+=skipCount)255==d[c*a.width*4+4*b-1]&&(particles1.push(new Particle1),particles1[particles1.length-1].setPos(b,c))})();function clear(){ctx.clearRect(0,0,W,H)}
-function update1(){clear();for(i=0;i<particles1.length;i++){var a=particles1[i];a.r+=.15;a.a-=.015;0>a.a&&(a.r=6*Math.random(),a.a=Math.random());mouse.x>a.x-a.r&&mouse.x<a.x+a.r&&mouse.y>a.y-a.r&&mouse.y<a.y+a.r&&(touched=!0);1==touched&&(Math.sqrt((a.x-mouse.x)*(a.x-mouse.x)+(a.y-mouse.y)*(a.y-mouse.y))<=minDist&&(a.isFree=!0),1==a.isFree&&(a.y+=a.vy,a.x+=a.vx,a.vy+=gravity,a.y+a.r>H&&(a.vy*=-bounceFactor,a.y=H-a.r,a.vx=0<a.vx?a.vx-.1:a.vx+.1),a.x+a.r>W&&(a.vx*=-bounceFactor,a.x=W-a.r),0>a.x-a.r&&
-(a.vx*=-bounceFactor,a.x=a.r)));ctx.globalCompositeOperation="lighter";a.draw()}}(function animloop(){requestAnimFrame(animloop);update1()})();
-  	
-$(document).ready(function(){
-
-	var listBgMusic = [		
-		{
-			title: "Liên khúc nonstop Chúc Mừng Năm Mới",
-			artist:"Đinh Kiến Phong",
-			mp3:"http://vannamit.com/2018/mp3/NonstopChucMungNamMoi-DinhKienPhong-4301830.mp3"
-		},{
-			title: "Chúc mừng năm mới",
-			artist:"Hồ Quang Hiếu",
-			mp3:"http://vannamit.com/2018/mp3/ChucMungNamMoi-HoQuangHieu-3748398.mp3"
-		}
-		
-	];
-	
-	var ranBg = Math.floor(Math.random() * listBgMusic.length);
-	
-	var MBG = $("#bg-music").jPlayer({
-        ready: function () {
-          $(this).jPlayer("setMedia", listBgMusic[ranBg]).jPlayer("play");
-        },
-		ended: function() {
-			var ranBgNew = Math.floor(Math.random() * listBgMusic.length);
-			while(ranBgNew == ranBg){
-				ranBgNew = Math.floor(Math.random() * listBgMusic.length);
-			}	
-			$(this).jPlayer("setMedia", listBgMusic[ranBgNew]).jPlayer("play");
-		},
-		error: function(){
-			var ranBgNew = Math.floor(Math.random() * listBgMusic.length);
-			while(ranBgNew == ranBg){
-				ranBgNew = Math.floor(Math.random() * listBgMusic.length);
-			}	
-			$(this).jPlayer("setMedia", listBgMusic[ranBgNew]).jPlayer("play");
-		},
-        cssSelectorAncestor: "",		
-        swfPath: "lib/jplayer/jquery.jplayer.swf",
-        supplied: "m4a,oga,mp3",
-		preload: "auto",
-		volume: 1
-    });
-
-	$("#footer-controls a.music-control").on("click", function(){
-		var curState = $(this).data("play-pause");
-		if(curState == "play"){
-			MBG.jPlayer("pause");
-			$(this).data("play-pause", "pause").html('Bật nhạc <i class="fa fa-play-circle"></i>');
-		}else{
-			MBG.jPlayer("play");
-			$(this).data("play-pause", "play").html('Tắt nhạc <i class="fa fa-pause-circle"></i>');
-		}
-	});	
-		     
-	$('#count-down-wrapper .soon').attr('data-now',moment().format());     
-	var soon = document.querySelectorAll('#count-down-wrapper .soon');
-	Soon.create(soon[0]);
-		
-	var vnCurrentTime = moment.tz("Asia/Saigon");
-	var dd = vnCurrentTime.date();
-	var mm = vnCurrentTime.month()+1;
-	var yy = vnCurrentTime.year();	
-	var ld = getLunarDate(dd, mm, yy);
-	
-	$(".SLToday").html("Hôm nay: " + vnCurrentTime.format("DD-MM-YYYY") + " <i class='fa fa-calendar'></i> " + ld.day + "-" + ld.month + "-" + ld.year + ", " + getYearCanChi(ld.year));
-	
-	var monkeyCD = ["images/mcd.png", "images/mcd2.png", "images/mcd3.png", "images/mcd4.png"];
-	var textCD = [
-		"t chúc m cùng gia đình tràn đầy sức khỏe, thành công và hạnh phúc.",
-		"Năm mới Tết đến. Rước hên vào nhà. Quà cáp bao la. Mọi nhà no đủ. Vàng bạc đầy hũ. Gia chủ phát tài. Già trẻ gái trai. Sum vầy hạnh phúc. Cầu tài chúc phúc. Lộc đến quanh năm. An khang thịnh vượng!",
-		"Năm mới: Ngàn lần như ý, Vạn lần như mơ, Triệu sự bất ngờ, Tỷ lần hạnh phúc.",
-		"Chúc m: 12 tháng phú quý, 365 ngày phát tài, 8760 giờ sung túc, 525600 phút thành công 31536000 giây vạn sự như ý.",
-		"Sang năm mới chúc mọi người có một bầu trời sức khoẻ, một biển cả tình thương, một đại dương tình cảm, một điệp khúc tình yêu, một người yêu chung thủy, một tình bạn mênh mông, một gia đình thịnh vượng."
-	];
-	var monkeyX = $(window).width()/2 - $(".soon-group").outerWidth()/2 - 110 - 10;
-	var idcd = Math.floor(Math.random() * monkeyCD.length);
-	
-	var monkey = '<div id="mcd" style="display:block;width:140px; height:182px;position: absolute;z-index:30; top:0; left: ' + monkeyX + 'px"><div class="mkCD" style="background: transparent url('+ monkeyCD[idcd] +') center center no-repeat;background-size:100% 100%;"></div><div class="textCD"><div class="texts1">Chúc Mừng Năm Mới 2018</div><div class="texts1">'+ textCD[idcd] +'</div></div></div>';
-	
-	$("#count-down-wrapper").append(monkey);
-	
-	$(window).resize(function(){
-		monkeyX = $(window).width()/2 - $(".soon-group").outerWidth()/2 - 110 - 10;
-		$("#mcd").css("left", monkeyX+"px");
-	});
-	
-	$('.texts1').textillate({		
-		autoStart: false,
-		in: { effect: 'flipInY' },
-		out: { effect: 'hinge' }		
-	});
-	
-	$("#mcd").on('mouseenter', function(){
-		$(this).animate({width: "+=100", height: "+=130", top: "-=65"});
-		$(".mkCD").animate({width: "+=100", height: "+=130"});
-		$(".textCD").animate({width: "+=457", height: "+=210", left: "+=200"});
-		
-		$('.texts1').textillate('start');
-		$('.texts1').textillate('in');
-	})
-	.on('mouseleave', function(){
-		$(this).animate({width: "-=100", height: "-=130", top: 0});
-		$(".mkCD").animate({width: "-=100", height: "-=130"});
-		$(".textCD").animate({width: "-=457", height: "-=210", left: 0});
-				
-		$('.texts1').textillate('out');		
-	})	
-		
-});
-</script>
 </html>
