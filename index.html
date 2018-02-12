@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-  <head>
+<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF8">
     <title>New Year 2018 !</title>    
 	<meta content='width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0' name='viewport'/>
@@ -12,8 +11,8 @@
 	<link href='http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.css' rel='stylesheet'/>
 	<link href="fireworks.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="component.css" />
-	<link href="soon.min.css" type="text/css" rel="stylesheet"/>		
-	<link href="animate.css" type="text/css" rel="stylesheet"/>		
+	<link href="soon.min.css" rel="stylesheet"/>		
+	<link href="animate.css" rel="stylesheet"/>		
 	<style>
 		body {
 			margin: 0;
@@ -312,8 +311,8 @@
 			}
 		}
 	</style>
-  </head>
-  <body>
+</head>
+<body>
 	<div class="content-logo-wrap">
 		<div class="content-logo">
 			<svg class="sgmlogo" viewBox="0 0 1100 300">
@@ -435,7 +434,7 @@ $(document).ready(function(){
 			$(this).jPlayer("setMedia", listBgMusic[ranBgNew]).jPlayer("play");
 		},
         cssSelectorAncestor: "",		
-        swfPath: "jquery.jplayer.swf",
+        swfPath: "lib/jplayer/jquery.jplayer.swf",
         supplied: "m4a,oga,mp3",
 		preload: "auto",
 		volume: 1
@@ -464,7 +463,7 @@ $(document).ready(function(){
 	
 	$(".SLToday").html("Hôm nay: " + vnCurrentTime.format("DD-MM-YYYY") + " <i class='fa fa-calendar'></i> " + ld.day + "-" + ld.month + "-" + ld.year + ", " + getYearCanChi(ld.year));
 	
-	var monkeyCD = ["mcd.png", "mcd2.png", "mcd3.png", "mcd4.png"];
+	var monkeyCD = ["images/mcd.png", "images/mcd2.png", "images/mcd3.png", "images/mcd4.png"];
 	var textCD = [
 		"t chúc m cùng gia đình tràn đầy sức khỏe, thành công và hạnh phúc.",
 		"Năm mới Tết đến. Rước hên vào nhà. Quà cáp bao la. Mọi nhà no đủ. Vàng bạc đầy hũ. Gia chủ phát tài. Già trẻ gái trai. Sum vầy hạnh phúc. Cầu tài chúc phúc. Lộc đến quanh năm. An khang thịnh vượng!",
