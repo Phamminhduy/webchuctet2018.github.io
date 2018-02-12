@@ -14,7 +14,24 @@
 	<link href="fireworks.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="component.css" />
 	<link href="soon.min.css" rel="stylesheet"/>		
-	<link href="animate.css" rel="stylesheet"/>		
+	<link href="animate.css" rel="stylesheet"/>	
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript'></script>
+    <script src="soundjs-0.6.2.min.js"></script>
+    <script src="flashaudioplugin-0.6.2.min.js"></script>
+    <script src="jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="script.js"> </script>  
+    <script>
+	  createjs.FlashAudioPlugin.swfPath = "FlashAudioPlugin.swf";
+	  createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]);
+    </script>
+    <script src="requestanimframe.js"></script>
+    <script src="fireworks.min.js"></script>
+    <script src="moment.js"></script>
+    <script src="moment-timezone-with-data.js"></script>
+    <script src="amlich-ntt.js"></script>  
+    <script src="soon.min.js" data-auto="false"></script>
+    <script src="jquery.lettering.js"></script>
+    <script src="jquery.textillate.js"></script>	
 	<style>
 		body {
 			margin: 0;
@@ -313,6 +330,7 @@
 			}
 		}
 	</style>
+
 </head>
 <body>
 <div class="content-logo-wrap">
@@ -371,38 +389,20 @@
 		<a href="#" class="gp"><i class="fa fa-google-plus-square"></i></a>
 		<a href="#" class="yt"><i class="fa fa-youtube-square"></i></a>
 		<a href="https://www.facebook.com/thi.ta.779" class="fb"><i class="fa fa-facebook-official"></i></a>
-		<div style="clear:both;"/>
+		<div style="clear:both;"/></div>
 	</div>	
 	<div id="bg-music" class="jp-jplayer"></div>
   </body>
-  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' type='text/javascript'></script>
-  <script src="soundjs-0.6.2.min.js"></script>
-  <script src="flashaudioplugin-0.6.2.min.js"></script>
-  <script src="jquery.jplayer.min.js"></script>
-  <script type="text/javascript" src="script.js"> </script>  
   <script>
-	createjs.FlashAudioPlugin.swfPath = "FlashAudioPlugin.swf";
-	createjs.Sound.registerPlugins([createjs.WebAudioPlugin, createjs.HTMLAudioPlugin, createjs.FlashAudioPlugin]);
-  </script>
-  <script src="requestanimframe.js"></script>
-  <script src="fireworks.min.js"></script>
-  <script src="moment.js"></script>
-  <script src="moment-timezone-with-data.js"></script>
-  <script src="amlich-ntt.js"></script>  
-  <script src="soon.min.js" data-auto="false"></script>
-  <script src="jquery.lettering.js"></script>
-  <script src="jquery.textillate.js"></script>
-  
-  <script>
-var canvas=document.getElementById("canvastext"),ctx=canvas.getContext("2d"),W=window.innerWidth,H=window.innerHeight,text="2018",text2="Chúc Mừng Năm Mới Nhé Thi Ta",skipCount=4,gravity=.2,touched=!1,mouse={},minDist=20,bounceFactor=.6;canvas.height=H;canvas.width=W;function trackPos(a){mouse.x=a.pageX;mouse.y=a.pageY}
-var Particle1=function(){this.r=6*Math.random();this.y=this.x=-100;this.vy=-5+parseInt(10*Math.random());this.vx=-5+parseInt(10*Math.random());this.isFree=!1;this.a=Math.random();this.draw=function(){ctx.beginPath();ctx.fillStyle="rgb(255, 51, 51)"+this.a+")";ctx.arc(this.x,this.y,this.r,0,2*Math.PI,!1);ctx.fill();ctx.closePath()};this.setPos=function(a,d){this.x=a;this.y=d}},particles1=[];
-(function(){ctx.fillStyle="black";ctx.font="100px Arial, sans-serif";ctx.textAlign="center";ctx.fillText(text,W/2,H/3);ctx.fillStyle="rgb(255, 51, 51)";ctx.font="70px Arial, sans-serif";ctx.fillText(text2,W/2,H/3+100)})();(function(){})();(function(){for(var a=ctx.getImageData(0,0,W,W),d=a.data,b=0;b<a.height;b+=skipCount)for(var c=0;c<a.width;c+=skipCount)255==d[c*a.width*4+4*b-1]&&(particles1.push(new Particle1),particles1[particles1.length-1].setPos(b,c))})();function clear(){ctx.clearRect(0,0,W,H)}
-function update1(){clear();for(i=0;i<particles1.length;i++){var a=particles1[i];a.r+=.15;a.a-=.015;0>a.a&&(a.r=6*Math.random(),a.a=Math.random());mouse.x>a.x-a.r&&mouse.x<a.x+a.r&&mouse.y>a.y-a.r&&mouse.y<a.y+a.r&&(touched=!0);1==touched&&(Math.sqrt((a.x-mouse.x)*(a.x-mouse.x)+(a.y-mouse.y)*(a.y-mouse.y))<=minDist&&(a.isFree=!0),1==a.isFree&&(a.y+=a.vy,a.x+=a.vx,a.vy+=gravity,a.y+a.r>H&&(a.vy*=-bounceFactor,a.y=H-a.r,a.vx=0<a.vx?a.vx-.1:a.vx+.1),a.x+a.r>W&&(a.vx*=-bounceFactor,a.x=W-a.r),0>a.x-a.r&&
-(a.vx*=-bounceFactor,a.x=a.r)));ctx.globalCompositeOperation="lighter";a.draw()}}(function animloop(){requestAnimFrame(animloop);update1()})();
+    var canvas=document.getElementById("canvastext"),ctx=canvas.getContext("2d"),W=window.innerWidth,H=window.innerHeight,text="2018",text2="Chúc Mừng Năm Mới Nhé Thi Ta",skipCount=4,gravity=.2,touched=!1,mouse={},minDist=20,bounceFactor=.6;canvas.height=H;canvas.width=W;function trackPos(a){mouse.x=a.pageX;mouse.y=a.pageY}
+    var Particle1=function(){this.r=6*Math.random();this.y=this.x=-100;this.vy=-5+parseInt(10*Math.random());this.vx=-5+parseInt(10*Math.random());this.isFree=!1;this.a=Math.random();this.draw=function(){ctx.beginPath();ctx.fillStyle="rgb(255, 51, 51)"+this.a+")";ctx.arc(this.x,this.y,this.r,0,2*Math.PI,!1);ctx.fill();ctx.closePath()};this.setPos=function(a,d){this.x=a;this.y=d}},particles1=[];
+     (function(){ctx.fillStyle="black";ctx.font="100px Arial, sans-serif";ctx.textAlign="center";ctx.fillText(text,W/2,H/3);ctx.fillStyle="rgb(255, 51, 51)";ctx.font="70px Arial, sans-serif";ctx.fillText(text2,W/2,H/3+100)})();(function(){})();(function(){for(var a=ctx.getImageData(0,0,W,W),d=a.data,b=0;b<a.height;b+=skipCount)for(var c=0;c<a.width;c+=skipCount)255==d[c*a.width*4+4*b-1]&&(particles1.push(new Particle1),particles1[particles1.length-1].setPos(b,c))})();function clear(){ctx.clearRect(0,0,W,H)}
+      function update1(){clear();for(i=0;i<particles1.length;i++){var a=particles1[i];a.r+=.15;a.a-=.015;0>a.a&&(a.r=6*Math.random(),a.a=Math.random());mouse.x>a.x-a.r&&mouse.x<a.x+a.r&&mouse.y>a.y-a.r&&mouse.y<a.y+a.r&&(touched=!0);1==touched&&(Math.sqrt((a.x-mouse.x)*(a.x-mouse.x)+(a.y-mouse.y)*(a.y-mouse.y))<=minDist&&(a.isFree=!0),1==a.isFree&&(a.y+=a.vy,a.x+=a.vx,a.vy+=gravity,a.y+a.r>H&&(a.vy*=-bounceFactor,a.y=H-a.r,a.vx=0<a.vx?a.vx-.1:a.vx+.1),a.x+a.r>W&&(a.vx*=-bounceFactor,a.x=W-a.r),0>a.x-a.r&&
+      (a.vx*=-bounceFactor,a.x=a.r)));ctx.globalCompositeOperation="lighter";a.draw()}}(function animloop(){requestAnimFrame(animloop);update1()})();
   	
-$(document).ready(function(){
+      $(document).ready(function(){
 
-	var listBgMusic = [		
+	  var listBgMusic = [		
 		{
 			title: "Liên khúc nonstop Chúc Mừng Năm Mới",
 			artist:"Đinh Kiến Phong",
